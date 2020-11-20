@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8"></meta>
+
+<title>Users</title>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+</head>
+
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<label class="label">Search User by Group Id</label>
+		<form class="box" th:action="@{/user/searchByGroupId}" method="post" th:object="${group}">
+			<input placeholder="Group Id" class="form-control" required th:field="*{id}">
+			<button type="submit" class="button is-success">Search</button>
+		</form>
+		<table class="table">
+			<thead>
+				<tr>
+					<th >Id</th>
+					<th>Name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="userGroup: ${listUser}">
+					<th th:text="${userGroup.user.id}"></th>
+					<td th:text="${userGroup.user.name}"></td>
+					<td th:text="${userGroup.user.email}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
